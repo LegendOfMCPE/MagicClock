@@ -6,6 +6,8 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\Player;
+use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\block\BlockPlaceEvent;
 
 class EventHandler implements Listener{
     /** @var  Loader */
@@ -54,6 +56,24 @@ class EventHandler implements Listener{
         $item = $event->getItem();
         if($item->getID() == $this->plugin->getConfig()->get("itemID")){
             $this->plugin->toggleMagicClock($player);
+        }
+    }
+      /**
+     * @param BlockBreakEvent $event
+     */
+    public function onBlockPlace(BlockBreakEvent $event){
+        $player = $event->getPlayer();
+        if($this->plugin->isMagicClockEnabled($player)){
+            $event->setCancelled(true);
+        }
+    }
+     /**
+     * @param BlockPlaceEvent $event
+     */
+     public function onBlockBreak(BlockPlaceEvent $event){
+        $player = $event->getPlayer();
+        if($this->plugin->isMagicClockEnabled($player)){
+            $event->setCancelled(true);
         }
     }
 } 
