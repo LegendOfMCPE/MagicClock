@@ -1,5 +1,5 @@
 # FOR INTERNAL USE ONLY!
-version: 1.0.7
+version: 1.0.8
 
 #This let you enable MagicClock when a player joins! ...or not...
 enableonjoin: true
